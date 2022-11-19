@@ -1,7 +1,7 @@
 import java.awt.*;
 import javax.swing.JFrame;
 
-public class PCanvas {
+public class Canvas {
 
     public static void newWin(String title, int width, int height){
         JFrame f = new JFrame();
