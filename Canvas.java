@@ -7,6 +7,7 @@ public class Canvas {
         JFrame f = new JFrame();
         f.setSize(width, height);
         f.setTitle(title);
+        f.add(new tets());
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true);
     }

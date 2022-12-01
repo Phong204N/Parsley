@@ -8,5 +8,16 @@ public class Node {
         this.isVar = isVar;
     }
 
-    
+    public void addProd(Node n){
+        this.productions[productions.length] = n;
+    }
+
+    public String toString(){
+        String s = "Value: " + value + " isVar: " + isVar + " \nProductions: ";
+        for(int i = 0; i < productions.length; i++){
+            s += productions[i].value;
+        }
+        return s;
+    }
+
 }
