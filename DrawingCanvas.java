@@ -5,16 +5,20 @@ import javax.swing.*;
 public class DrawingCanvas extends JComponent {
     int width;
     int height;
+    Node[] nodes;
 
-    DrawingCanvas(int width, int height) {
+    DrawingCanvas(int width, int height, Node[] n) {
         this.width = width;
         this.height = height;
+        nodes = n;
     }
 
     protected void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        Node n = new Node('r', false, (width - 10) / 2, (height - 10) / 2);
-        n.drawNode(g2d);
+        for (Node n : nodes) {
+            n.drawNode(g2d);
+        }
+        repaint();
     }
 
 }

@@ -11,7 +11,12 @@ public class Canvas {
 
         JFrame f = new JFrame();
         JTextField t = new JTextField(20);
-        DrawingCanvas dc = new DrawingCanvas(width, height);
+        Node n = new Node('r', false, (width - 10) / 2, (height - 10) / 2);
+        Node n1 = new Node('r', false, (width - 50) / 2, (height - 50) / 2);
+        Node[] nodes = new Node[2];
+        nodes[0] = n;
+        nodes[1] = n1;
+        DrawingCanvas dc = new DrawingCanvas(width, height, nodes);
         f.setSize(width, height);
         f.setTitle(title);
         t.setSize(100, 20);
@@ -30,14 +35,10 @@ public class Canvas {
             public void keyPressed(KeyEvent e) {
                 // TODO Auto-generated method stub
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+
                     t.setText("");
-                    int dcWidth = dc.width - 100;
-                    int dcHeight = dc.height;
-                    System.out.println(dc);
-                    DrawingCanvas dc = new DrawingCanvas(dcWidth, dcHeight);
-                    f.add(dc);
-                    f.setVisible(true);
-                    System.out.println(dc);
+                    nodes[1] = new Node('a', false, width - 100, height - 100);
+                    dc.repaint();
                 }
             }
 
