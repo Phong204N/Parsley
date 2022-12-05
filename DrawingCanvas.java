@@ -18,7 +18,6 @@ public class DrawingCanvas extends JComponent {
         for (Node n : nodes) {
             n.drawNode(g2d);
         }
-        repaint();
     }
 
 }

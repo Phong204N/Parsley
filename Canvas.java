@@ -6,8 +6,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class Canvas {
@@ -21,6 +25,13 @@ public class Canvas {
         JTextField rulePrompt = new JTextField(20);
         JButton addButt = new JButton("Add Rule");
         JButton evalButt = new JButton("Evaluate");
+        JTextArea textArea = new JTextArea(10, 20);
+        JLabel label = new JLabel("");
+        JPanel pmain = new JPanel(new FlowLayout());
+        JPanel p = new JPanel(new FlowLayout());
+        JPanel p2 = new JPanel(new FlowLayout());
+        JPanel p3 = new JPanel(new FlowLayout());
+        JPanel p4 = new JPanel(new FlowLayout());
 
         Node n0 = new Node('X', false, (width - 10) / 2, (height - 10) / 2);
         Node n1 = new Node('Y', false, (width - 50) / 2, (height - 50) / 2);
@@ -34,13 +45,25 @@ public class Canvas {
         f.setTitle(title);
         rulePrompt.setBounds(marginX, marginY, 200, 20);
         addButt.setBounds(5 + rulePrompt.getWidth() + marginX, marginY, addButt.getPreferredSize().width, 20);
+        // textArea.setBounds(marginX, marginY, 200, 20);
+        textArea.setLineWrap(true);
+        textArea.setEditable(false);
         evalButt.setBounds(marginX, marginY + 40, 100, 20);
 
-        f.add(rulePrompt);
-        f.add(addButt);
-        f.add(evalButt);
-        f.add(dc);
+        p.add(new JLabel("Parsley"));
+        p2.add(rulePrompt);
+        p2.add(addButt);
+        p3.add(textArea);
+        p3.add(evalButt);
+        p4.add(label);
 
+        pmain.add(p);
+        pmain.add(p2);
+        pmain.add(p3);
+        pmain.add(p4);
+        f.add(pmain);
+
+        // makeButtonInPanel(p4, 'c');
         ProductionSet pSet = new ProductionSet();
 
         rulePrompt.addKeyListener(new KeyListener() {
@@ -57,6 +80,9 @@ public class Canvas {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     ProductionRule recruit = new ProductionRule(rulePrompt.getText());
                     pSet.addRule(recruit);
+                    if (recruit.pass) {
+                        textArea.append(recruit.rule + "\n");
+                    }
                     rulePrompt.setText("");
                     f.repaint();
                     // dc.repaint();
@@ -76,6 +102,9 @@ public class Canvas {
             public void actionPerformed(ActionEvent e) {
                 ProductionRule recruit = new ProductionRule(rulePrompt.getText());
                 pSet.addRule(recruit);
+                if (recruit.pass) {
+                    textArea.append(recruit.rule + "\n");
+                }
                 rulePrompt.setText("");
                 f.repaint();
                 // dc.repaint();
@@ -86,6 +115,11 @@ public class Canvas {
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true);
 
+    }
+
+    public static void makeButtonInPanel(JPanel p, char c) {
+        JButton button = new JButton(String.valueOf(c));
+        p.add(button);
     }
 
     public void draw(Graphics g) {
